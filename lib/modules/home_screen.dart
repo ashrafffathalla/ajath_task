@@ -50,6 +50,41 @@ class HomeScreen extends StatelessWidget {
             height: size.height * 0.02,
           ),
           buildHeads('Category', size),
+          SizedBox(
+            height: size.height * 0.02,
+          ),
+          Container(
+            height: size.height * 0.15,
+            child: ListView.separated(
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (context, index) => buildCategoryWidget(size),
+              separatorBuilder: (context, index) => SizedBox(
+                width: size.width * 0,
+              ),
+              itemCount: 5,
+            ),
+          ),
+          SizedBox(
+            height: size.height * 0.02,
+          ),
+          buildHeads('Top Tutors', size),
+          SizedBox(
+            height: size.height * 0.02,
+          ),
+          Container(
+            height: size.height * 0.15,
+            child: ListView.separated(
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (context, index) => buildTopTutors(size),
+              separatorBuilder: (context, index) => SizedBox(
+                width: size.width * 0,
+              ),
+              itemCount: 5,
+            ),
+          ),
+          SizedBox(
+            height: size.height * 0.04,
+          ),
         ],
       ),
     );
@@ -204,28 +239,59 @@ class HomeScreen extends StatelessWidget {
       );
 
   //end build PopularCourses
+
   //Start buildCategoryWidget
-  Widget buildCategoryWidget(size) => Container(
-        width: size.width * 0.3,
-        height: size.height * 0.14,
+  Widget buildCategoryWidget(size) => Padding(
+        padding: EdgeInsets.symmetric(
+          horizontal: size.width * 0.03,
+        ),
         child: Container(
           width: size.width * 0.3,
           height: size.height * 0.14,
+          child: Container(
+            width: size.width * 0.3,
+            height: size.height * 0.14,
+            child: Center(
+                child: Text(
+              'Deisgn',
+              style: TextStyle(
+                fontSize: 20.sp,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+            )),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              color: Colors.red.withOpacity(0.7),
+            ),
+          ),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
-            color: Colors.red.withOpacity(0.7),
-          ),
-        ),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          image: DecorationImage(
-            fit: BoxFit.cover,
-            image: NetworkImage(
-              'https://img.freepik.com/free-vector/red-heart-with-heartbeat-line-medical-background_1017-26835.jpg?t=st=1650759858~exp=1650760458~hmac=e2d3fa988941f64006cb7102b069dc972b37737fc3480e56218f298ba82e4a1a&w=740',
+            image: DecorationImage(
+              fit: BoxFit.cover,
+              image: NetworkImage(
+                'https://img.freepik.com/free-vector/red-heart-with-heartbeat-line-medical-background_1017-26835.jpg?t=st=1650759858~exp=1650760458~hmac=e2d3fa988941f64006cb7102b069dc972b37737fc3480e56218f298ba82e4a1a&w=740',
+              ),
             ),
           ),
         ),
       );
-//end buildCategoryWidget
 
+//end buildCategoryWidget
+//start buildTopTutors
+  Widget buildTopTutors(size) => Padding(
+        padding: EdgeInsets.symmetric(
+          horizontal: size.width * 0.03,
+        ),
+        child: Row(
+          children: [
+            CircleAvatar(
+              backgroundImage: NetworkImage(
+                  'https://img.freepik.com/free-photo/waist-up-portrait-handsome-serious-unshaven-male-keeps-hands-together-dressed-dark-blue-shirt-has-talk-with-interlocutor-stands-against-white-wall-self-confident-man-freelancer_273609-16320.jpg?t=st=1650764016~exp=1650764616~hmac=a69a262463cacdd800e9cb071ad20c2d100a152e284f4e48e8a459639d082add&w=740'),
+              radius: 30,
+            ),
+          ],
+        ),
+      );
+//end buildTopTutors
 }
