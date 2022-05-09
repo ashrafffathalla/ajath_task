@@ -15,136 +15,119 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery
-        .of(context)
-        .size;
+    Size size = MediaQuery.of(context).size;
     return BlocProvider(
-      create: (BuildContext context) =>
-      AppCubit()
-        ..getHomeData(),
+      create: (BuildContext context) => AppCubit()..getHomeData(),
       child: BlocConsumer<AppCubit, AppStates>(
         listener: (context, state) {},
         builder: (context, state) {
           return ConditionalBuilder(
             condition: state is! AppLoadingGetDataState,
-            builder: (context) =>
-                SingleChildScrollView(
-                  physics: const BouncingScrollPhysics(
-                      parent: AlwaysScrollableScrollPhysics()),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.symmetric(
-                          vertical: size.height * 0.06,
-                          horizontal: size.width * 0.05,
-                        ),
-                        child: defaultFormField(
-                          context,
-                          controller: searchController,
-                          type: TextInputType.text,
-                          label: 'Find Course',
-                        ),
-                      ),
-                      buildHeads('Popular Courses', size),
-                      SizedBox(
-                        height: size.height * 0.04,
-                      ),
-                      Container(
-                        height: size.height * 0.36,
-                        child: ListView.separated(
-                          shrinkWrap: true,
-                          physics: const BouncingScrollPhysics(),
-                          scrollDirection: Axis.horizontal,
-                          itemBuilder: (context, index) =>
-                              buildPopularCourses(
-                                size,
-
-                              ),
-                          separatorBuilder: (context, index) =>
-                              SizedBox(
-                                width: size.width * 0.01,
-                              ),
-                          itemCount: AppCubit
-                              .get(context)
-                              .homeModel!
-                              .popularCourses!
-                              .dataModel!
-                              .length,
-                        ),
-                      ),
-                      SizedBox(
-                        height: size.height * 0.02,
-                      ),
-                      buildHeads('Category', size),
-                      SizedBox(
-                        height: size.height * 0.02,
-                      ),
-                      Container(
-                        height: size.height * 0.15,
-                        child: ListView.separated(
-                          scrollDirection: Axis.horizontal,
-                          itemBuilder: (context, index) =>
-                              buildCategoryWidget(
-                                size,
-                                AppCubit
-                                    .get(context)
-                                    .homeModel!
-                                    .categoies!
-                                    .dataModel![index],
-                              ),
-                          separatorBuilder: (context, index) =>
-                              SizedBox(
-                                width: size.width * 0,
-                              ),
-                          itemCount: AppCubit
-                              .get(context)
-                              .homeModel!
-                              .categoies!
-                              .dataModel!
-                              .length,
-                        ),
-                      ),
-                      SizedBox(
-                        height: size.height * 0.02,
-                      ),
-                      buildHeads('Top Tutors', size),
-                      SizedBox(
-                        height: size.height * 0.02,
-                      ),
-                      Container(
-                        height: size.height * 0.15,
-                        child: ListView.separated(
-                          scrollDirection: Axis.horizontal,
-                          itemBuilder: (context, index) =>
-                              buildTopTutors(
-                                size,
-                                //AppCubit.get(context)
-                                // .homeModel!
-                                // .categoies!
-                                // .dataModel![index],
-
-
-                              ),
-                          separatorBuilder: (context, index) =>
-                              SizedBox(
-                                width: size.width * 0,
-                              ),
-                          itemCount: 5, //AppCubit.get(context)
-                          //     .homeModel!
-                          //     .categoies!
-                          //     .dataModel!
-                          //     .length,
-                        ),
-                      ),
-                      SizedBox(
-                        height: size.height * 0.04,
-                      ),
-                    ],
+            builder: (context) => SingleChildScrollView(
+              physics: const BouncingScrollPhysics(
+                  parent: AlwaysScrollableScrollPhysics()),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.symmetric(
+                      vertical: size.height * 0.06,
+                      horizontal: size.width * 0.05,
+                    ),
+                    child: defaultFormField(
+                      context,
+                      controller: searchController,
+                      type: TextInputType.text,
+                      label: 'Find Course',
+                    ),
                   ),
-                ),
+                  buildHeads('Popular Courses', size),
+                  SizedBox(
+                    height: size.height * 0.04,
+                  ),
+                  Container(
+                    height: size.height * 0.36,
+                    child: ListView.separated(
+                      shrinkWrap: true,
+                      physics: const BouncingScrollPhysics(),
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (context, index) => buildPopularCourses(
+                        size,
+                      ),
+                      separatorBuilder: (context, index) => SizedBox(
+                        width: size.width * 0.01,
+                      ),
+                      itemCount: AppCubit.get(context)
+                          .homeModel!
+                          .popularCourses!
+                          .dataModel!
+                          .length,
+                    ),
+                  ),
+                  SizedBox(
+                    height: size.height * 0.02,
+                  ),
+                  buildHeads('Category', size),
+                  SizedBox(
+                    height: size.height * 0.02,
+                  ),
+                  Container(
+                    height: size.height * 0.15,
+                    child: ListView.separated(
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (context, index) => buildCategoryWidget(
+                        size,
+                        AppCubit.get(context)
+                            .homeModel!
+                            .categoies!
+                            .dataModel![index],
+                      ),
+                      separatorBuilder: (context, index) => SizedBox(
+                        width: size.width * 0,
+                      ),
+                      itemCount: AppCubit.get(context)
+                          .homeModel!
+                          .categoies!
+                          .dataModel!
+                          .length,
+                    ),
+                  ),
+                  SizedBox(
+                    height: size.height * 0.02,
+                  ),
+                  buildHeads('Top Tutors', size),
+                  SizedBox(
+                    height: size.height * 0.02,
+                  ),
+                  Container(
+                    height: size.height * 0.15,
+                    child: ListView.separated(
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (context, index) => buildTopTutors(
+                        size,
+                        //AppCubit.get(context)
+                        // .homeModel!
+                        // .categoies!
+                        // .dataModel![index],
+                      ),
+                      separatorBuilder: (context, index) => SizedBox(
+                        width: size.width * 0,
+                      ),
+                      itemCount: 5, //AppCubit.get(context)
+                      //     .homeModel!
+                      //     .categoies!
+                      //     .dataModel!
+                      //     .length,
+                    ),
+                  ),
+                  SizedBox(
+                    height: size.height * 0.04,
+                  ),
+                ],
+              ),
+            ),
             fallback: (context) =>
-            const Center(child: CircularProgressIndicator()),
+                const Center(child: CircularProgressIndicator()),
           );
         },
       ),
@@ -152,7 +135,9 @@ class HomeScreen extends StatelessWidget {
   }
 
   //Start build PopularCourses
-  Widget buildPopularCourses(size,) =>
+  Widget buildPopularCourses(
+    size,
+  ) =>
       Padding(
         padding: EdgeInsets.symmetric(
           horizontal: size.width * 0.03,
@@ -303,8 +288,7 @@ class HomeScreen extends StatelessWidget {
   //end build PopularCourses
 
   //Start buildCategoryWidget
-  Widget buildCategoryWidget(size, DataModel dataModelModel) =>
-      Padding(
+  Widget buildCategoryWidget(size, DataModel dataModelModel) => Padding(
         padding: EdgeInsets.symmetric(
           horizontal: size.width * 0.03,
         ),
@@ -316,13 +300,13 @@ class HomeScreen extends StatelessWidget {
             height: size.height * 0.14,
             child: Center(
                 child: Text(
-                  dataModelModel.name!,
-                  style: TextStyle(
-                    fontSize: 20.sp,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
-                )),
+              dataModelModel.name!,
+              style: TextStyle(
+                fontSize: 20.sp,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+            )),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
               color: Colors.red.withOpacity(0.7),
@@ -342,8 +326,7 @@ class HomeScreen extends StatelessWidget {
 
 //end buildCategoryWidget
 //start buildTopTutors
-  Widget buildTopTutors(size) =>
-      Padding(
+  Widget buildTopTutors(size) => Padding(
         padding: EdgeInsets.symmetric(
           horizontal: size.width * 0.03,
         ),
